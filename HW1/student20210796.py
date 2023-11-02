@@ -26,7 +26,7 @@ ap_value=int(n*0.15)
 b_value=int(n*0.7)
 bp_value=int(n*0.5)
 for row in range(2, ws.max_row+1):
-	if ws.cell(row=row, column=7).value<40:
+	if ws.cell(row=row, column=7).value < 40:
 		f_cnt += 1
 cp_cnt=int((n-b_value-f_cnt)/2)
 cp_value=b_value+cp_cnt
