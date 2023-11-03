@@ -37,7 +37,7 @@ for row in range(2, ws.max_row+1):
 		grade='A+'
 	elif rank[row-2] <= a_value:
 		grade='A0'
-	elif rank[row-2] <= a_value+(b_value-a_value)/2
+	elif rank[row-2] <= a_value+((b_value-a_value)/2):
 		grade='B+'
 	elif rank[row-2] <= b_value:
 		grade='B0'
