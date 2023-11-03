@@ -22,22 +22,23 @@ for row in list:
 	rank.append(s_list.index(row)+1)
 n = ws.max_row-1
 a_value=int(n*0.3)
-ap_value=int(n*0.15)
+# ap_value=int(n*0.15)
 b_value=int(n*0.7)
-bp_value=int(n*0.5)
+# bp_value=int(n*0.5)
 for row in range(2, ws.max_row+1):
 	if ws.cell(row=row, column=7).value < 40:
 		f_cnt += 1
-cp_cnt=int((n-b_value-f_cnt)/2)
-cp_value=b_value+cp_cnt
+# cp_cnt=int((n-b_value-f_cnt)/2)
+# cp_value=b_value+cp_cnt
+cp_value = int(((n*0.7)+(n-(n*0.7)-f_cnt))/2)
 
 for row in range(2, ws.max_row+1):
 	if ws.cell(row=row, column=7).value >= 40:
-		if rank[row-2] <= ap_value:
+		if rank[row-2] <= (a_value / 2):
 			grade='A+'
 		elif rank[row-2] <= a_value:
 			grade='A0'
-		elif rank[row-2] <= bp_value:
+		elif rank[row-2] <= (b_value / 2):
 			grade='B+'
 		elif rank[row-2] <= b_value:
 			grade='B0'
