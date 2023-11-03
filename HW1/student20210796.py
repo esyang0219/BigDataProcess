@@ -31,20 +31,19 @@ cp_cnt=int((n-b_value-f_cnt)/2)
 cp_value=b_value+cp_cnt
 
 for row in range(2, ws.max_row+1):
-	if ws.cell(row=row, column=7).value >= 40:
-		if rank[row-2] <= (a_value / 2):
-			grade='A+'
-		elif rank[row-2] <= a_value:
-			grade='A0'
-		elif rank[row-2] <= (b_value / 2):
-			grade='B+'
-		elif rank[row-2] <= b_value:
-			grade='B0'
-		elif rank[row-2] <= cp_value:
-			grade='C+'
-		else:
-			grade='C0'			
+	if ws.cell(row=row, column=7).value < 40:
+	        grade='F'
+	elif rank[row-2] <= (a_value / 2):
+		grade='A+'
+	elif rank[row-2] <= a_value:
+		grade='A0'
+	elif rank[row-2] <= a_value+(b_value-a_value)/2
+		grade='B+'
+	elif rank[row-2] <= b_value:
+		grade='B0'
+	elif rank[row-2] <= cp_value:
+		grade='C+'
 	else:
-		grade='F'	
+		grade='C0'			
 	ws.cell(row=row, column=8, value=grade)
 wb.save('student.xlsx')
