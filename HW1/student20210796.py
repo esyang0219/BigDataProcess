@@ -26,7 +26,9 @@ b_value=int(n*0.7)
 for row in range(2, ws.max_row+1):
 	if ws.cell(row=row, column=7).value < 40:
 		f_cnt += 1
-cp_value=int(n*0.7+((0.3*n-f_cnt)/2))
+
+cp_cnt=int((n-b_value-f_cnt)/2)
+cp_value=b_value+cp_cnt
 
 for row in range(2, ws.max_row+1):
 	if ws.cell(row=row, column=7).value >= 40:
