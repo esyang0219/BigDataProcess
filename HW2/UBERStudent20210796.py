@@ -1,21 +1,32 @@
 #!/usr/bin/python3
 import sys
-import calendar
+from datetime import datetime
 
-def information(line):
-	info=line.strip().split(',')
-	base_num, date, vehicles, trips=info
-	month,day,year=date.split('/')
-	return base_num, month, day, year, vehicles, trips
-
-def write_info(input_file, output_file):
-	with open(input_file, 'r') as f1, open(output_file, 'w') as f2:
-		for line in f1:
-			base_num,month,day,year,vehicles,trips=information(line)
+def info(input_file, output_file):
+	uberDict = dict()
+	with open(input_file, 'r') as f:
+		for line in f:
+			line = line.strip()
+			fields = line.split(',')
+			region = fields[0]
+			dateString = fields[1]
+			vehicles = int(fields[2])
+			trips = int(fields[3])
+			date = datetime.strptime(dateString, "%m/%d/%Y")
 			dayofweek=['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
-			eng_day=calendar.weekday(int(year), int(month), int(day))
-			f2.write(f"{base_num},{dayofweek[eng_day]} {vehicles},{trips}\n")
+			day = dayofweek[date.weekday()]
+
+			uberKey = "%s,%s" % (region, day)
+			if uberKey in uberDict:
+				uberDict[uberKey][0] += vehicles
+				uberDict[uberKey][1] += trips
+			else:
+				uberDict[uberKey] = [vehicles, trips]
+	with open(output_file, 'w') as f:
+		for uberKey, uberValue in uberDict.items():
+			f.write("%s %d,%d\n" % (uberKey, uberValue[0], uberValue[1]))
+
 if __name__ == '__main__':
 	input_file=sys.argv[1]
 	output_file=sys.argv[2]
-	write_info(input_file, output_file)
+	info(input_file, output_file)
