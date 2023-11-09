@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import sys
 def count_genre(input_file):
 	movie_count={}
 	with open(input_file, 'r') as f:
@@ -19,7 +20,6 @@ def write_genre(output_file, movie_count):
 			f.write(f"{genre} {count}\n")
 
 if __name__ == '__main__':
-	import sys
 	input_file=sys.argv[1]
 	output_file=sys.argv[2]
 
