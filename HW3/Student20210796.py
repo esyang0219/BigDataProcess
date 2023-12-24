@@ -9,7 +9,6 @@ def createDataSet(dirname):
 	trainingFileList = listdir(dirname)
 	m = len(trainingFileList)
 	matrix = np.zeros((m, 1024)) 
-
 	for i in range(m): 
 		fileNameStr = trainingFileList[i]
 		answer = int(fileNameStr.split('_')[0])  
