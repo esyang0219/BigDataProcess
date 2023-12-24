@@ -40,17 +40,17 @@ def classify0(inX, dataSet, labels, k):
 	return sortedClassCount[0][0]
 
 if __name__ == "__main__":
-	trainingFileDirName = sys.argv[1]
-	testFileDirName = sys.argv[2]
-	testFileList = listdir(testFileDirName)
+	trainingFileName = sys.argv[1]
+	testFileName = sys.argv[2]
+	testFileList = listdir(testFileName)
 	length = len(testFileList)
-	matrix, labels = createDataSet(trainingFileDirName)
+	matrix, labels = createDataSet(trainingFileName)
 	for k in range(1, 20, 2): 
     		cnt = 0 
     		errorCnt = 0
     		for i in range(length): 
         		answer = int(testFileList[i].split('_')[0])
-        		testData = autoNorm(testFileDirName + '/' + testFileList[i])
+        		testData = autoNorm(testFileName + '/' + testFileList[i])
         		classifiedResult = classify0(testData, matrix, labels, k)
         		cnt += 1
         		if answer != classifiedResult :
