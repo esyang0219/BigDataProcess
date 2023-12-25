@@ -3,6 +3,15 @@ import numpy as np
 import operator
 from os import listdir
 
+def autoNorm(filename):  
+    normDataSet = np.zeros((1, 1024)) 
+    with open(filename) as f:
+        for i in range(32):
+            line = f.readline()
+            for j in range(32):
+                normDataSet[0, 32 * i + j] = int(line[j])
+        return normDataSet        
+
 def createDataSet(dirname):
     labels = []
     trainingFileList = listdir(dirname)
@@ -28,15 +37,6 @@ def classify0(inX, dataSet, labels, k):
         classCount[voteIlabel] = classCount.get(voteIlabel, 0) + 1 
     sortedClassCount = sorted(classCount.items(), key= operator.itemgetter(1), reverse=True) 
     return sortedClassCount[0][0]
-
-def autoNorm(filename):  
-    normDataSet = np.zeros((1, 1024)) 
-    with open(filename) as f:
-        for i in range(32):
-            line = f.readline()
-            for j in range(32):
-                normDataSet[0, 32 * i + j] = int(line[j])
-        return normDataSet        
 
 trainingFileName = sys.argv[1]
 testFileName = sys.argv[2]
