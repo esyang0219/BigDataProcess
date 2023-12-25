@@ -29,27 +29,27 @@ def classify0(inX, dataSet, labels, k):
     sortedClassCount = sorted(classCount.items(), key= operator.itemgetter(1), reverse=True) 
     return sortedClassCount[0][0]
 
-def getVector(filename):  
-    vector = np.zeros((1, 1024)) 
+def autoNorm(filename):  
+    normDataSet = np.zeros((1, 1024)) 
     with open(filename) as f:
         for i in range(32):
             line = f.readline()
             for j in range(32):
-                vector[0, 32 * i + j] = int(line[j])
-        return vector        
+                normDataSet[0, 32 * i + j] = int(line[j])
+        return normDataSet        
 
-trainingFileDirName = sys.argv[1]
-testFileDirName = sys.argv[2]
-testFileList = listdir(testFileDirName)
+trainingFileName = sys.argv[1]
+testFileName = sys.argv[2]
+testFileList = listdir(testFileName)
 length = len(testFileList)
-matrix, labels = createDataSet(trainingFileDirName)
+matrix, labels = createDataSet(trainingFileName)
 
 for k in range(1, 20, 2): 
     count = 0 
     errorCount = 0 
     for i in range(length): 
         answer = int(testFileList[i].split('_')[0])
-        testData = getVector(testFileDirName + '/' + testFileList[i])
+        testData = autoNorm(testFileName + '/' + testFileList[i])
         classifiedResult = classify0(testData, matrix, labels, k)
         count += 1
         if answer != classifiedResult :
