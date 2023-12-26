@@ -3,21 +3,21 @@ import numpy as np
 import operator
 from os import listdir
 
-def createDataSet(dirname):
+def createDataSet(dirName):
     labels = []
-    trainingFileList = listdir(dirname)
+    trainingFileList = listdir(dirName)
     length = len(trainingFileList)
     matrix = np.zeros((length, 1024)) 
     for i in range(length): 
         fileName = trainingFileList[i]
         num = int(fileName.split('_')[0])  
         labels.append(num)
-        matrix[i, :] = autoNorm(dirname + '/' + fileName)
+        matrix[i, :] = autoNorm(dirName + '/' + fileName)
     return matrix, labels 
 
-def autoNorm(filename):  
+def autoNorm(fileName):  
     normDataSet = np.zeros((1, 1024)) 
-    with open(filename) as f:
+    with open(fileName) as f:
         for i in range(32):
             line = f.readline()
             for j in range(32):
