@@ -6,9 +6,9 @@ from os import listdir
 def createDataSet(dirname):
     labels = []
     trainingFileList = listdir(dirname)
-    m = len(trainingFileList)
-    matrix = np.zeros((m, 1024)) 
-    for i in range(m): 
+    length = len(trainingFileList)
+    matrix = np.zeros((length, 1024)) 
+    for i in range(length): 
         fileName = trainingFileList[i]
         num = int(fileName.split('_')[0])  
         labels.append(num)
