@@ -10,8 +10,8 @@ def createDataSet(dirname):
     matrix = np.zeros((m, 1024)) 
     for i in range(m): 
         fileName = trainingFileList[i]
-        answer = int(fileName.split('_')[0])  
-        labels.append(answer)
+        num = int(fileName.split('_')[0])  
+        labels.append(num)
         matrix[i, :] = autoNorm(dirname + '/' + fileName)
     return matrix, labels 
 
@@ -48,10 +48,10 @@ for k in range(1, 21):
     cnt = 0 
     errorCnt = 0 
     for i in range(length): 
-        answer = int(testFileList[i].split('_')[0])
+        num = int(testFileList[i].split('_')[0])
         testData = autoNorm(testFileName + '/' + testFileList[i])
-        classifiedResult = classify0(testData, matrix, labels, k)
+        result = classify0(testData, matrix, labels, k)
         cnt += 1
-        if answer != classifiedResult :
+        if num != result:
             errorCnt += 1
     print(int(errorCnt / cnt * 100))
