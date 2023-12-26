@@ -9,10 +9,10 @@ def createDataSet(dirname):
     m = len(trainingFileList)
     matrix = np.zeros((m, 1024)) 
     for i in range(m): 
-        fileNameStr = trainingFileList[i]
-        answer = int(fileNameStr.split('_')[0])  
+        fileName = trainingFileList[i]
+        answer = int(fileName.split('_')[0])  
         labels.append(answer)
-        matrix[i, :] = autoNorm(dirname + '/' + fileNameStr)
+        matrix[i, :] = autoNorm(dirname + '/' + fileName)
     return matrix, labels 
 
 def autoNorm(filename):  
