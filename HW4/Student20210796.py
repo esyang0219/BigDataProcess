@@ -45,13 +45,13 @@ length = len(testFileList)
 matrix, labels = createDataSet(trainingFileName)
 
 for k in range(1, 21): 
-    count = 0 
-    errorCount = 0 
+    cnt = 0 
+    errorCnt = 0 
     for i in range(length): 
         answer = int(testFileList[i].split('_')[0])
         testData = autoNorm(testFileName + '/' + testFileList[i])
         classifiedResult = classify0(testData, matrix, labels, k)
-        count += 1
+        cnt += 1
         if answer != classifiedResult :
-            errorCount += 1
-    print(int(errorCount / count * 100))
+            errorCnt += 1
+    print(int(errorCnt / cnt * 100))
