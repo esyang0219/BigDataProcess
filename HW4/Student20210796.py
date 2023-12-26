@@ -3,15 +3,6 @@ import numpy as np
 import operator
 from os import listdir
 
-def autoNorm(filename):  
-    normDataSet = np.zeros((1, 1024)) 
-    with open(filename) as f:
-        for i in range(32):
-            line = f.readline()
-            for j in range(32):
-                normDataSet[0, 32 * i + j] = int(line[j])
-        return normDataSet        
-
 def createDataSet(dirname):
     labels = []
     trainingFileList = listdir(dirname)
@@ -23,6 +14,15 @@ def createDataSet(dirname):
         labels.append(answer)
         matrix[i, :] = autoNorm(dirname + '/' + fileNameStr)
     return matrix, labels 
+
+def autoNorm(filename):  
+    normDataSet = np.zeros((1, 1024)) 
+    with open(filename) as f:
+        for i in range(32):
+            line = f.readline()
+            for j in range(32):
+                normDataSet[0, 32 * i + j] = int(line[j])
+        return normDataSet        
 
 def classify0(inX, dataSet, labels, k): 
     dataSetSize = dataSet.shape[0]
